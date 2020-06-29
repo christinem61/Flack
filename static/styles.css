@@ -1,0 +1,70 @@
+#one-msg>p{
+    font-size: 10px;
+    color:red;
+}
+#chl{
+    justify-content: center;
+}
+#welcome{
+    font-weight: 700;
+    font-size: 25px;
+    text-align: center;
+    color: darkgreen;
+}
+#col1{
+    background-color:gray;
+}
+#newCform{
+    display:table-cell;
+    width:85%;
+}
+#newCbutton{
+    width:15%;
+}
+#msg{
+    padding:10px;
+    bottom:10%;
+}
+#msg-form{
+    width:90%;
+}
+#hide{
+    height: 100vh;
+    text-align:center;
+}
+#username-form{
+    display:table-cell;
+    width:80%;
+    height:35px;
+}
+#username-button{
+    width:10%;
+    height:35px;
+}
+#channel-list, #msgs, #dm-list{
+    list-style-type: none;
+    padding:20px;
+    width:100%;
+    margin:0;
+}
+#channel-list>li{
+    padding:6px;
+    font-size: 20px;
+    border-style: solid;
+    text-align:center;
+    color:white;
+    border-color: darkgrey;
+}
+#channel-list>li:hover, #dm-list>li:hover, #dm-menu>p:hover{
+    font-weight:bold;
+}
+#dm-menu>p{
+    padding:6px;
+    text-align: center;
+}
+#msgs>li{
+    margin:6px;
+}
+#dm-menu{
+    background-color: white;
+}
