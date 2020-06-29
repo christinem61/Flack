@@ -34,11 +34,11 @@ def create_dm(data):
     if data['channel'] not in DIRECTmessages:
         DIRECTmessages[data['channel']]=[deque(maxlen=100), deque(maxlen=100), deque(maxlen=100),deque(maxlen=100)]
 
-@socketio.on('saved')
+@socketio.on('saved')   #user already signed in
 def saved():
     emit("chatroom")
 
-@socketio.on('new channel')
+@socketio.on('new channel')     #add new channel to dictionary
 def new_channel(data):
     if data['name'] not in CHANNELS:
         CHANNELS.add(data['name'])
@@ -47,12 +47,12 @@ def new_channel(data):
     else:
         emit("try again")
 
-@socketio.on('show channels')
+@socketio.on('show channels')   #display all channels that exist
 def show_channels():
     for channel in CHANNELS:
         emit("display channels", {'channel':channel})
 
-@socketio.on('show dms')
+@socketio.on('show dms')        #display all users that you are private messaging
 def show_dms(data):
     user = data['user']
     for dm in DIRECTmessages:
@@ -62,11 +62,11 @@ def show_dms(data):
             rcvr = rcvr.replace("-","")
             emit("display dms", {'name': rcvr, 'original': dm})
 
-@socketio.on("show latest channel")
+@socketio.on("show latest channel")     #display channel recently created for EVERYONE
 def showLatest(data):
     emit('display channels', { "channel" : data['name']}, broadcast = True)
 
-@socketio.on('show msgs')
+@socketio.on('show msgs')               #show latest 100 messages for specificed channel
 def show_msgs(data):
     MessageArray = MESSAGES.get(data['channel'])
     if MessageArray is None:
@@ -74,7 +74,7 @@ def show_msgs(data):
     for i in range(len(MessageArray[0])):
         emit("show msgs", {'msg': MessageArray[0][i], 'date': MessageArray[1][i], 'time':MessageArray[2][i] , 'user': MessageArray[3][i], 'channel': data['channel'] })
 
-@socketio.on('show latest msg')
+@socketio.on('show latest msg')         #real time communication: shows latest message
 def show_latest(data):
     MessageArray = MESSAGES.get(data['channel'])
     if MessageArray is None:
@@ -82,7 +82,7 @@ def show_latest(data):
     i = len(MessageArray[0]) - 1
     emit("show msgs", {'msg': MessageArray[0][i], 'date': MessageArray[1][i], 'time':MessageArray[2][i] , 'user':MessageArray[3][i], 'channel': data['channel'] }, broadcast = True)
 
-@socketio.on('msg')
+@socketio.on('msg')                #stores message in list in dictionary
 def msg(data):
     x = MESSAGES.get(data['channel'])
     if x is None:

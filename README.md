@@ -1,9 +1,3 @@
-# Project 2
-
-Christine Mathews
-
-Web Programming with Python and JavaScript
-
 This is an online messaging service (similar to Slack) using Python Flask,
 HTML, CSS and Javascript. Once users sign into the site with a display name, 
 they can create their own channels/chatrooms to communicate in and join existing
@@ -11,6 +5,8 @@ channels. Users are able to send and receive messages with one another in real
 time. Websockets are used to make this real-time communication possible. Socket.IO 
 is the JavaScript library that suppports this protocol. This web app also allows for 
 users to private/direct message other users who have signed in. 
+
+Video Demonstration: https://youtu.be/fkf4RgwGrBA
 
 
 application.py

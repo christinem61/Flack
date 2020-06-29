@@ -35,14 +35,13 @@ document.addEventListener('DOMContentLoaded', () => {
         socket.emit('show channels');
         socket.emit('show dms', {'user': localStorage.getItem('username')});
 
-
         document.getElementById('chatroom').style.display = "block";
         
         document.querySelector('#add-channel').onclick = () => {
             add();
         };
 
-        //add DM button click
+        //direct-message button
         document.querySelector('#add-dm').onclick = () => {
             socket.emit('dropdown');
         };
@@ -57,16 +56,13 @@ document.addEventListener('DOMContentLoaded', () => {
             socket.emit('msg', {'msg': msg , 'date': date, 'time': time, 'channel': localStorage.getItem('channel') , 'user': localStorage.getItem('username')});
             
             //show latest msg
-            //alert("before sending: " + localStorage.getItem('channel'));
             socket.emit('show latest msg', { 'channel': localStorage.getItem('channel') });
             document.getElementById('msg-form').value = "";
         };
     });
 
     socket.on("show msgs", data =>{
-        //alert("in show msgs: "+ localStorage.getItem('channel'));
         if (localStorage.getItem('channel') == data.channel){
-            //alert("live channel");
             if (document.querySelectorAll("#one-msg").length == 1001){
                 var list = document.getElementById("msgs");
                 list.removeChild(list.firstChild);
@@ -99,7 +95,6 @@ document.addEventListener('DOMContentLoaded', () => {
     socket.on("display dms", data =>{
         const li = document.createElement('li');
         li.innerHTML = data.name;
-        //alert("data.orginal: "+data.original);
         li.onclick = () => {
             localStorage.setItem("channel", data.original);
             displayActiveChannel(data.name);
@@ -188,7 +183,4 @@ document.addEventListener('DOMContentLoaded', () => {
             socket.emit('new channel', {'name': name});
         };
     }
-    
-
-
 });
